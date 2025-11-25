@@ -1,0 +1,112 @@
+[
+  {
+    "id": "f4a5a834-8895-5f0d-9852-f479fc732c24",
+    "sku": "PT001",
+    "name": "Lenovo IdeaPad 3",
+    "category": "Computers",
+    "price": 600,
+    "quantity": 100,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "f5d192e1-de89-5dab-b32b-b52c27f699f6",
+    "sku": "PT002",
+    "name": "Beats Pro",
+    "category": "Electronics",
+    "price": 160,
+    "quantity": 140,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "f8ade7b6-a45f-500a-96c8-60adfb2ce59d",
+    "sku": "PT003",
+    "name": "Nike Jordan",
+    "category": "Shoe",
+    "price": 110,
+    "quantity": 300,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "6000d683-36cd-5b93-bd33-4c583ae90d36",
+    "sku": "PT004",
+    "name": "Apple Series 5 Watch",
+    "category": "Electronics",
+    "price": 110,
+    "quantity": 300,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "0641564e-da92-5dd4-9296-9ed4c01d70fd",
+    "sku": "PT005",
+    "name": "Amazon Echo Dot",
+    "category": "Electronics",
+    "price": 80,
+    "quantity": 320,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "607ca4cc-2054-59cb-902d-7deb2907e67b",
+    "sku": "PT006",
+    "name": "Sanford Chair Sofa",
+    "category": "Furnitures",
+    "price": 320,
+    "quantity": 650,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "0993934a-d062-54ab-9a04-6472954cccc6",
+    "sku": "PT007",
+    "name": "Red Premium Satchel",
+    "category": "Bags",
+    "price": 60,
+    "quantity": 700,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "f91d9b9e-2d54-5b62-b8f3-aff65b036f1f",
+    "sku": "PT008",
+    "name": "Iphone 14 Pro",
+    "category": "Phone",
+    "price": 540,
+    "quantity": 630,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "f9c46229-7fc9-5d5b-ac57-cd9a9e666626",
+    "sku": "PT009",
+    "name": "Gaming Chair",
+    "category": "Furniture",
+    "price": 200,
+    "quantity": 410,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "32551134-24d3-5fa0-828c-5a6d5e67eba9",
+    "sku": "PT010",
+    "name": "Borealis Backpack",
+    "category": "Bags",
+    "price": 45,
+    "quantity": 550,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "31d8adb7-dd39-5b50-973c-563131ba98b5",
+    "sku": "PT011",
+    "name": "Borealis Backpack",
+    "category": "Bags",
+    "price": 45,
+    "quantity": 550,
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  }
+]
