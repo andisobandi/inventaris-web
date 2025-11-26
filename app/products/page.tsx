@@ -1,8 +1,12 @@
+'use client';
+
 import { columns } from './columns';
 import { DataTable } from '@/components/datatable';
-import products from '../../data/products.json';
+import { useAppSelector } from '@/store/hooks';
 
 export default function Products() {
+  const products = useAppSelector((s) => s.products.products);
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="flex items-center justify-between gap-2">
