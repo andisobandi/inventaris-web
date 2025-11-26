@@ -23,7 +23,7 @@ interface AddProductProps {
 export function AddProduct({ open, onOpenChange }: AddProductProps) {
   const dispatch = useAppDispatch();
 
-  function onSubmit(data: ProductFormValues) {
+  const onSubmit = (data: ProductFormValues) => {
     const payload = {
       name: data.name,
       category: data.category,
@@ -35,7 +35,7 @@ export function AddProduct({ open, onOpenChange }: AddProductProps) {
     dispatch(addProduct(payload));
     onOpenChange(false);
     toast.success('Product has been created');
-  }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

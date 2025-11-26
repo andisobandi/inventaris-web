@@ -12,6 +12,7 @@ import { Product } from '@/data/schema';
 import { DataTableRowActions } from '@/components/datatable/datatable-row-actions';
 
 export const columns = (
+  onEdit: (p: Product) => void,
   onDelete: (p: Product) => void
 ): ColumnDef<Product>[] => [
   {
@@ -131,6 +132,8 @@ export const columns = (
   },
   {
     id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} onDelete={onDelete} />,
+    cell: ({ row }) => (
+      <DataTableRowActions row={row} onEdit={onEdit} onDelete={onDelete} />
+    ),
   },
 ];

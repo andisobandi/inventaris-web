@@ -15,11 +15,13 @@ import {
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
+  onEdit?: (item: TData) => void;
   onDelete?: (item: TData) => void;
 }
 
 export function DataTableRowActions<TData>({
   row,
+  onEdit,
   onDelete,
 }: DataTableRowActionsProps<TData>) {
   const item = row.original;
@@ -38,9 +40,11 @@ export function DataTableRowActions<TData>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-40">
-          {/* <DropdownMenuItem onClick={() => setOpenEditModal(true)}>
-            Edit
-          </DropdownMenuItem> */}
+          {onEdit && (
+            <DropdownMenuItem onClick={() => onEdit(item)}>
+              Edit
+            </DropdownMenuItem>
+          )}
           {onDelete && (
             <DropdownMenuItem
               variant="destructive"

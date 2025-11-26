@@ -38,12 +38,14 @@ export type ProductFormValues = z.infer<typeof productSchema>;
 
 type FormProductProps = {
   onSubmitData: (data: ProductFormValues) => void;
+  defaultValues?: Partial<ProductFormValues>;
 };
 
-export function FormProduct({ onSubmitData }: FormProductProps) {
+export function FormProduct({ onSubmitData, defaultValues }: FormProductProps) {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { isValid },
   } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
@@ -53,8 +55,21 @@ export function FormProduct({ onSubmitData }: FormProductProps) {
       quantity: 0,
       category: '',
       price: 0,
+      ...defaultValues,
     },
   });
+
+  React.useEffect(() => {
+    if (defaultValues) {
+      reset({
+        sku: defaultValues.sku || '',
+        name: defaultValues.name || '',
+        quantity: defaultValues.quantity ?? 1,
+        category: defaultValues.category || '',
+        price: defaultValues.price ?? 0,
+      });
+    }
+  }, [defaultValues]);
 
   const onSubmit: SubmitHandler<ProductFormValues> = (data) => {
     onSubmitData(data);
