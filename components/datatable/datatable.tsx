@@ -30,26 +30,25 @@ import { DataTableToolbar } from './datatable-toolbar';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  categories: {
+    label: string;
+    value: string;
+  }[];
+  extraToolbarActions?: {
+    onAdd?: () => void;
+  };
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  categories,
+  extraToolbarActions,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-
-  const categories = React.useMemo(() => {
-    const set = new Set<string>();
-    data.forEach((item: any) => set.add(item.category));
-
-    return Array.from(set).map((c) => ({
-      label: c,
-      value: c,
-    }));
-  }, [data]);
 
   const table = useReactTable({
     data,
@@ -70,7 +69,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <Card className="gap-2">
-      <DataTableToolbar table={table} categories={categories} />
+      <DataTableToolbar
+        table={table}
+        categories={categories}
+        onAdd={extraToolbarActions?.onAdd}
+      />
       <CardContent className="p-0">
         <div className="overflow-hidden">
           <Table>

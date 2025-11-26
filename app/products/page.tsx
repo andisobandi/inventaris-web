@@ -1,11 +1,16 @@
 'use client';
 
+import React from 'react';
+
 import { columns } from './columns';
 import { DataTable } from '@/components/datatable';
 import { useAppSelector } from '@/store/hooks';
+import { productCategories } from '@/data/data';
+import { AddProduct } from './add-product';
 
 export default function Products() {
   const products = useAppSelector((s) => s.products.products);
+  const [openAdd, setOpenAdd] = React.useState(false);
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -15,7 +20,13 @@ export default function Products() {
           <p className="text-muted-foreground">Manage your products</p>
         </div>
       </div>
-      <DataTable data={products} columns={columns} />
+      <DataTable
+        data={products}
+        categories={productCategories}
+        columns={columns}
+        extraToolbarActions={{ onAdd: () => setOpenAdd(true) }}
+      />
+      <AddProduct open={openAdd} onOpenChange={setOpenAdd} />
     </div>
   );
 }

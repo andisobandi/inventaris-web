@@ -1,58 +1,85 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
 import type { Product } from '@/data/schema';
-import initialProducts from '@/data/products.json';
 
 export interface ProductsState {
   products: Product[];
 }
 
 const initialState: ProductsState = {
-  products: (initialProducts as Product[]).map((p) => ({ ...p })),
+  products: [],
 };
 
 const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    addProduct: {
-      reducer(state, action: PayloadAction<Product>) {
-        state.products.unshift(action.payload);
-      },
-      prepare(payload: {
-        name: string;
-        quantity: number;
-        category?: string;
-        price?: number;
-      }) {
-        return {
-          payload: {
-            id: nanoid(),
-            sku: `SKU-${Date.now().toString().slice(-6)}`,
-            name: payload.name,
-            category: payload.category ?? 'uncategorized',
-            price: payload.price ?? 0,
-            quantity: payload.quantity,
-            updatedAt: new Date().toISOString(),
-          } as Product,
-        };
-      },
-    },
-    updateQuantity(
-      state,
-      action: PayloadAction<{ id: string; delta: number; updatedAt?: string }>
-    ) {
-      const p = state.products.find((x) => x.id === action.payload.id);
-      if (!p) return;
-      p.quantity = Math.max(0, (p.quantity ?? 0) + action.payload.delta);
-      p.updatedAt = action.payload.updatedAt ?? new Date().toISOString();
-    },
     setProducts(state, action: PayloadAction<Product[]>) {
       state.products = action.payload;
+    },
+
+    addProduct(
+      state,
+      action: PayloadAction<Omit<Product, 'id' | 'createdAt' | 'updatedAt'>>
+    ) {
+      const newProduct: Product = {
+        ...action.payload,
+        id: nanoid(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      state.products.unshift(newProduct);
+    },
+
+    increaseStock(
+      state,
+      action: PayloadAction<{ id: string; amount?: number }>
+    ) {
+      const { id, amount = 1 } = action.payload;
+      const p = state.products.find((x) => x.id === id);
+      if (p) {
+        p.quantity += amount;
+        p.updatedAt = new Date().toISOString();
+      }
+    },
+
+    decreaseStock(
+      state,
+      action: PayloadAction<{ id: string; amount?: number }>
+    ) {
+      const { id, amount = 1 } = action.payload;
+      const p = state.products.find((x) => x.id === id);
+      if (p) {
+        p.quantity = Math.max(0, p.quantity - amount);
+        p.updatedAt = new Date().toISOString();
+      }
+    },
+
+    updateProduct(
+      state,
+      action: PayloadAction<Partial<Product> & { id: string }>
+    ) {
+      const { id, ...rest } = action.payload;
+      const p = state.products.find((x) => x.id === id);
+      if (p) {
+        Object.assign(p, rest);
+        p.updatedAt = new Date().toISOString();
+      }
+    },
+
+    deleteProduct(state, action: PayloadAction<{ id: string }>) {
+      state.products = state.products.filter((x) => x.id !== action.payload.id);
     },
   },
 });
 
-export const { addProduct, updateQuantity, setProducts } =
-  productsSlice.actions;
+export const {
+  setProducts,
+  addProduct,
+  increaseStock,
+  decreaseStock,
+  updateProduct,
+  deleteProduct,
+} = productsSlice.actions;
+
 export default productsSlice.reducer;

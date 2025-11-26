@@ -4,8 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { DataTableColumnHeader } from '@/components/datatable/datatable-column-header';
-
-import { Product } from '../../data/schema';
+import { Product } from '@/data/schema';
 import { DataTableRowActions } from '@/components/datatable/datatable-row-actions';
 
 export const columns: ColumnDef<Product>[] = [

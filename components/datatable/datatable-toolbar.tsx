@@ -20,11 +20,13 @@ interface DataTableToolbarProps<TData> {
     value: string;
     icon?: React.ComponentType<{ className?: string }>;
   }[];
+  onAdd?: () => void;
 }
 
 export function DataTableToolbar<TData>({
   table,
   categories,
+  onAdd,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -63,7 +65,9 @@ export function DataTableToolbar<TData>({
         )}
       </div>
       <CardAction>
-        <Button size="sm">Add Product</Button>
+        <Button size="sm" onClick={onAdd}>
+          Add Product
+        </Button>
       </CardAction>
     </CardHeader>
   );
