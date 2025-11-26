@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { toast } from 'sonner';
 
 import {
   Dialog,
@@ -11,17 +12,15 @@ import {
 } from '@/components/ui/dialog';
 import { useAppDispatch } from '@/store/hooks';
 import { addProduct } from '@/store/products-slice';
-import { toast } from 'sonner';
 import { FormProduct } from './form-product';
 import type { ProductFormValues } from './form-product';
 
-export function AddProduct({
-  open,
-  onOpenChange,
-}: {
+interface AddProductProps {
   open: boolean;
-  onOpenChange: (v: boolean) => void;
-}) {
+  onOpenChange: (open: boolean) => void;
+}
+
+export function AddProduct({ open, onOpenChange }: AddProductProps) {
   const dispatch = useAppDispatch();
 
   function onSubmit(data: ProductFormValues) {

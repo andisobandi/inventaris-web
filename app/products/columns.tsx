@@ -7,7 +7,9 @@ import { DataTableColumnHeader } from '@/components/datatable/datatable-column-h
 import { Product } from '@/data/schema';
 import { DataTableRowActions } from '@/components/datatable/datatable-row-actions';
 
-export const columns: ColumnDef<Product>[] = [
+export const columns = (
+  onDelete: (p: Product) => void
+): ColumnDef<Product>[] => [
   {
     id: 'select',
     header: ({ table }) => (
@@ -96,6 +98,6 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    cell: ({ row }) => <DataTableRowActions row={row} onDelete={onDelete} />,
   },
 ];

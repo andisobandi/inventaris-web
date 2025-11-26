@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Row } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 
@@ -12,36 +13,45 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { productSchema } from '../../data/schema';
-
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
+  onDelete?: (item: TData) => void;
 }
 
 export function DataTableRowActions<TData>({
   row,
+  onDelete,
 }: DataTableRowActionsProps<TData>) {
-  const product = productSchema.parse(row.original);
+  const item = row.original;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="data-[state=open]:bg-muted size-8"
-        >
-          <MoreHorizontal />
-          <span className="sr-only">Open menu</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-40">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <React.Fragment>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="data-[state=open]:bg-muted size-8"
+          >
+            <MoreHorizontal />
+            <span className="sr-only">Open menu</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-40">
+          {/* <DropdownMenuItem onClick={() => setOpenEditModal(true)}>
+            Edit
+          </DropdownMenuItem> */}
+          {onDelete && (
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => onDelete(item)}
+            >
+              Delete
+              <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </React.Fragment>
   );
 }
