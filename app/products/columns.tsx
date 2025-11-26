@@ -1,7 +1,11 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
+import { Minus, Plus } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
+import { useAppDispatch } from '@/store/hooks';
+import { decreaseStock, increaseStock } from '@/store/products-slice';
 import { Checkbox } from '@/components/ui/checkbox';
 import { DataTableColumnHeader } from '@/components/datatable/datatable-column-header';
 import { Product } from '@/data/schema';
@@ -76,6 +80,35 @@ export const columns = (
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Quantity" />
     ),
+    cell: ({ row }) => {
+      const product = row.original;
+      const dispatch = useAppDispatch();
+
+      return (
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => dispatch(decreaseStock({ id: product.id }))}
+            disabled={product.quantity <= 0}
+          >
+            <Minus className="size-3" />
+          </Button>
+
+          <span className="min-w-8 text-center font-medium">
+            {product.quantity}
+          </span>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => dispatch(increaseStock({ id: product.id }))}
+          >
+            <Plus className="size-3" />
+          </Button>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'updatedAt',
